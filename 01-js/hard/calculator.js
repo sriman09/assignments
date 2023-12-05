@@ -31,7 +31,14 @@ class Calculator {
     this.result *= number;
   }
   divide(number) {
-    this.result /= number;
+    try {
+      if (number === 0) {
+        throw new Error("Cannot divide by zero");
+      }
+      this.result /= number;
+    } catch (err) {
+      throw err;
+    }
   }
   clear() {
     this.result = 0;
@@ -39,6 +46,35 @@ class Calculator {
   getResult() {
     return this.result;
   }
+
+  calculate(str) {
+    let operationsArr = str.split(" ");
+    console.log("operationsArr", operationsArr);
+    let result = Number(operationsArr[0]);
+    for (let i = 1; i < operationsArr.length; i++) {
+      switch (operationsArr[i]) {
+        case "+": {
+          result += Number(operationsArr[i + 1]);
+          break;
+        }
+        case "-": {
+          result -= Number(operationsArr[i + 1]);
+          break;
+        }
+        case "/": {
+          result /= Number(operationsArr[i + 1]);
+          break;
+        }
+        case "*": {
+          result *= Number(operationsArr[i + 1]);
+          break;
+        }
+      }
+    }
+    return result;
+  }
 }
 
+let calc = new Calculator();
+console.log(calc.calculate("2 + 3 * 4"));
 module.exports = Calculator;

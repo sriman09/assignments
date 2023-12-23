@@ -41,7 +41,7 @@ function signJwt(username, password) {
  */
 function verifyJwt(token) {
   // Your code here
-  jwt.verify(token, jwtPassword, (err, user) => {
+  return jwt.verify(token, jwtPassword, (err, user) => {
     if (err) {
       return false;
     } else {
